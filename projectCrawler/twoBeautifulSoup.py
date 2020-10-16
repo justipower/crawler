@@ -1,10 +1,10 @@
 import requests
-import resp as resp
 from bs4 import BeautifulSoup
+url = 'https://www.ptt.cc/bbs/Beauty/index.html'
+html = requests.get(url)
+html.encoding = 'UTF-8'
+# sp = BeautifulSoup(html.text, 'lxml')
 
-soup = BeautifulSoup(resp.text, 'lxml')
-
-soup = BeautifulSoup(open('index.html'))
-
-with open("index.html") as f:
-    soup = BeautifulSoup(f)
+soup = BeautifulSoup(html.text, 'html.parser')
+results = soup.select('div.title')
+print(results)

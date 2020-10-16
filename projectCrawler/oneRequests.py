@@ -6,8 +6,8 @@ from bs4 import BeautifulSoup
 
 ### 1. Use Requests to get information and display.
 # my_headers = {'cookie': 'over18=1;'}
-# url = 'https://www.ptt.cc/bbs/Beauty/index.html'
-# res = requests.get(url, headers = my_headers)
+# QQ_url = 'https://www.ptt.cc/bbs/Beauty/index.html'
+# res = requests.get(QQ_url, headers = my_headers)
 # print(res.status_code)
 # print(res.text)
 
