@@ -1,21 +1,50 @@
+############## find() / find_all() ##############
+# from bs4 import BeautifulSoup
+# html = '''
+# <html>
+#     <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
+#     <body>
+#         <p id="p1">我是段落一</p>
+#         <p id="p2" class='red'>我是段落二</p>
+#     </body>
+# '''
+# sp = BeautifulSoup(html, 'lxml')
+# print(sp.find('p'))
+# print(sp.find_all('p'))
+# print(sp.find('p', {'id':'p2', 'class':'red'}))
+# print(sp.find('p', id='p2', class_='red'))
+
+
 ############## PTT輸出title ##############
-import requests    #匯入requests
-from bs4 import BeautifulSoup   #從bs4匯入BeautifulSoup
 
-my_headers = {'cookie': 'over18=1;'}   #將cookie的over18值定為1, 該值為1即表示略過18歲限制畫面, 將此設定放入變數my_headers
+# 匯入requests
+import requests
+# 從bs4匯入BeautifulSoup
+from bs4 import BeautifulSoup
+
+# 將cookie的over18值定為1, 該值為1即表示略過18歲限制畫面, 將此設定放入變數my_headers
+my_headers = {'cookie' : 'over18=1;'}
 url = 'https://www.ptt.cc/bbs/Beauty/index.html'
-html = requests.get(url, headers=my_headers)   #直接進入Beauty版. 放入變數html
-html.encoding = 'UTF-8'   #該網頁要使用的編碼為'UTF-8'
-sp = BeautifulSoup(html.text, 'html.parser')   #建立名為sp的BeautifulSoup物件解析原始碼html text格式, 用python內建的解析器
-results = sp.select("div.title")   #使用模組select()方法讀取<div.title>標籤（選定要調整樣式的元素）
+# 直接進入Beauty版. 放入變數html
+html = requests.get(url, headers=my_headers)
+# 該網頁要使用的編碼為'UTF-8'
+html.encoding = 'UTF-8'
+# 建立名為sp的BeautifulSoup物件解析原始碼html text格式, 用python內建的解析器
+sp = BeautifulSoup(html.text, 'html.parser')
+# 使用模組select()方法讀取<div.title>標籤（選定要調整樣式的元素）
+results = sp.select("div.title")
 
-for item in results:   #從results中撈到的值放到item
-    a_item = item.select_one("a")   #取item的第一個值（item[0])裡的<a>
-    title = item.text   #傳回item去除掉標籤的html文字內容
-    if a_item:   #if a_item不為空
-        print(title, 'https://www.ptt.cc'+ a_item.get('href'))   #就print
+# 從results中撈到的值放到item
+for item in results :
+    # 取item的第一個值（item[0])裡的<a>
+    a_item = item.select_one("a")
+    # 傳回item去除掉標籤的html文字內容
+    title = item.text
+    # if a_item不為空
+    if a_item :
+        print(title, 'https://www.ptt.cc' + a_item.get('href'))
 
-#第二種方法
+# 第二種方法
 # for item in results:   #從results中去跑每一個item
 #     a_item = item.select("a")   #
 #     # print(a_item)
