@@ -1,9 +1,5 @@
 # Project one Crawler - Requests
 
-import requests
-from bs4 import BeautifulSoup
-
-
 ### 1. Use Requests to get information and display.
 my_headers = {'cookie': 'over18=1;'}
 QQ_url = 'https://www.ptt.cc/bbs/Beauty/index.html'
